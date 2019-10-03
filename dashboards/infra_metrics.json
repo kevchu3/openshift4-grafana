@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
   "links": [],
   "panels": [
     {
@@ -1999,7 +1998,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "Dropped Bytes by Node alert",
+        "name": "Error Bytes by Node alert",
         "noDataState": "ok",
         "notifications": []
       },
@@ -2021,7 +2020,7 @@
         "avg": false,
         "current": false,
         "hideEmpty": false,
-        "hideZero": true,
+        "hideZero": false,
         "max": false,
         "min": false,
         "show": false,
@@ -2043,12 +2042,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node:node_net_saturation:sum_irate",
+          "expr": "sum by (node) (rate(node_network_receive_errs_total{device!~\"veth.+\",job=\"node-exporter\"}[2m]) * on (namespace, pod) group_left(node) node_namespace_pod:kube_pod_info:)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{node}}",
+          "legendFormat": "receive: {{node}}",
           "refId": "A",
           "step": 120
+        },
+        {
+          "expr": "sum by (node) (rate(node_network_transmit_errs_total{device!~\"veth.+\",job=\"node-exporter\"}[2m]) * on (namespace, pod) group_left(node) node_namespace_pod:kube_pod_info:)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "transmit: {{node}}",
+          "refId": "B"
         }
       ],
       "thresholds": [
@@ -2057,14 +2063,13 @@
           "fill": true,
           "line": true,
           "op": "gt",
-          "value": 0,
-          "yaxis": "left"
+          "value": 0
         }
       ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dropped Bytes by Node",
+      "title": "Error Bytes by Node",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -4308,7 +4313,7 @@
       }
     }
   ],
-  "refresh": "30s",
+  "refresh": false,
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
@@ -4316,8 +4321,8 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
-    "to": "now"
+    "from": "2019-10-03T17:09:39.161Z",
+    "to": "2019-10-03T17:19:39.163Z"
   },
   "timepicker": {
     "refresh_intervals": [
