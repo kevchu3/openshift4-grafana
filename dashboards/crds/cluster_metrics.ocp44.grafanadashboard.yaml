@@ -23,7 +23,7 @@ spec:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 5,
+      "id": 6,
       "links": [],
       "panels": [
         {
@@ -358,7 +358,7 @@ spec:
             "for": "5m",
             "frequency": "1m",
             "handler": 1,
-            "name": "Cluster Operator Conditions alert",
+            "name": "Cluster Operators by Failed Condition alert",
             "noDataState": "alerting",
             "notifications": [
               {
@@ -373,7 +373,7 @@ spec:
           "dashes": false,
           "datasource": "Prometheus",
           "decimals": 0,
-          "description": "Show cluster operators that are not Available",
+          "description": "Cluster operators in Progress, Degraded, Failing, etc...",
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -415,7 +415,7 @@ spec:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "(cluster_operator_conditions{condition!~\"Available|Upgradeable\"} == 1)",
+              "expr": "(cluster_operator_conditions{condition!~\"Available|Upgradeable|RetrievedUpdates\"} == 1)",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -429,14 +429,13 @@ spec:
               "fill": true,
               "line": true,
               "op": "gt",
-              "value": 0,
-              "yaxis": "left"
+              "value": 0
             }
           ],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Cluster Operator Conditions",
+          "title": "Cluster Operators by Failed Condition",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1135,7 +1134,7 @@ spec:
                 },
                 "query": {
                   "params": [
-                    "A",
+                    "B",
                     "5m",
                     "now"
                   ]
@@ -1203,11 +1202,17 @@ spec:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (alertname)(ALERTS{alertname!=\"Watchdog\"})",
+              "expr": "sum by (alertname, severity)(ALERTS{alertname!=\"Watchdog\"})",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{alertname}}",
+              "legendFormat": "{{alertname}} ({{severity}})",
               "refId": "A"
+            },
+            {
+              "expr": "sum by (severity)(ALERTS{severity!~\"none|info|warning\"})",
+              "hide": true,
+              "legendFormat": "Critical alerts",
+              "refId": "B"
             }
           ],
           "thresholds": [
@@ -2179,7 +2184,7 @@ spec:
         "list": []
       },
       "time": {
-        "from": "now-1h",
+        "from": "now-3h",
         "to": "now"
       },
       "timepicker": {
