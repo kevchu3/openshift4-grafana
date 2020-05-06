@@ -359,7 +359,7 @@ spec:
             "frequency": "1m",
             "handler": 1,
             "name": "Cluster Operators by Failed Condition alert",
-            "noDataState": "alerting",
+            "noDataState": "ok",
             "notifications": [
               {
                 "id": 1
@@ -1151,7 +1151,7 @@ spec:
             "frequency": "1m",
             "handler": 1,
             "name": "Alerts by State",
-            "noDataState": "alerting",
+            "noDataState": "ok",
             "notifications": []
           },
           "aliasColors": {},
