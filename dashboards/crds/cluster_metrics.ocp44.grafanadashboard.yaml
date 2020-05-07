@@ -23,7 +23,7 @@ spec:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 6,
+      "id": 2,
       "links": [],
       "panels": [
         {
@@ -834,7 +834,7 @@ spec:
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 8,
+            "w": 6,
             "x": 0,
             "y": 8
           },
@@ -932,8 +932,8 @@ spec:
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 8,
-            "x": 8,
+            "w": 6,
+            "x": 6,
             "y": 8
           },
           "hiddenSeries": false,
@@ -1036,8 +1036,111 @@ spec:
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 8,
-            "x": 16,
+            "w": 6,
+            "x": 12,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 105,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(kubelet_runtime_operations_duration_seconds_bucket[5m])) by (operation_type, le))",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "runtime: {{operation_type}}",
+              "refId": "A"
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(kubelet_cgroup_manager_duration_seconds_bucket[5m])) by (operation_type, le))",
+              "legendFormat": "cgroup: {{operation_type}}",
+              "refId": "B"
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(kubelet_pod_worker_duration_seconds_bucket[5m])) by (operation_type, le))",
+              "legendFormat": "worker: {{operation_type}}",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Kubelet Operations Latency",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
             "y": 8
           },
           "hiddenSeries": false,
@@ -2215,7 +2318,7 @@ spec:
       "timezone": "",
       "title": "Cluster Metrics",
       "uid": "dxkdT-eWz",
-      "version": 1
+      "version": 2
     }
   name: cluster-metrics.json
 
