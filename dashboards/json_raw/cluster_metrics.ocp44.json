@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -352,11 +352,7 @@
         "handler": 1,
         "name": "Cluster Operators by Failed Condition alert",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "id": 1
-          }
-        ]
+        "notifications": []
       },
       "aliasColors": {},
       "bars": false,
@@ -397,7 +393,6 @@
         "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "6.5.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1287,7 +1282,6 @@
         "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "6.5.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1759,11 +1753,7 @@
         "handler": 1,
         "name": "Cluster Pod Requests and Limits alert",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "id": 1
-          }
-        ]
+        "notifications": []
       },
       "aliasColors": {},
       "bars": false,
@@ -1926,11 +1916,7 @@
         "handler": 1,
         "name": "Pods per App Node alert",
         "noDataState": "no_data",
-        "notifications": [
-          {
-            "id": 1
-          }
-        ]
+        "notifications": []
       },
       "aliasColors": {},
       "bars": false,
@@ -2166,11 +2152,7 @@
         "handler": 1,
         "name": "Persistent Volume Claim Used % alert",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "id": 1
-          }
-        ]
+        "notifications": []
       },
       "aliasColors": {},
       "bars": false,

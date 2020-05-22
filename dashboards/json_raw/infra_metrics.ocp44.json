@@ -420,11 +420,7 @@
         "handler": 1,
         "name": "Nodes in Not Ready State alert",
         "noDataState": "alerting",
-        "notifications": [
-          {
-            "id": 1
-          }
-        ]
+        "notifications": []
       },
       "aliasColors": {},
       "bars": false,
@@ -2361,11 +2357,7 @@
         "handler": 1,
         "name": "Nodes by Version alert",
         "noDataState": "no_data",
-        "notifications": [
-          {
-            "id": 1
-          }
-        ]
+        "notifications": []
       },
       "aliasColors": {},
       "bars": false,
