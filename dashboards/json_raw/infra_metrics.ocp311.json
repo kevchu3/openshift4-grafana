@@ -1003,7 +1003,7 @@
       ],
       "datasource": "Prometheus",
       "description": "Compute nodes only",
-      "format": "decbytes",
+      "format": "bytes",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -1089,7 +1089,7 @@
       ],
       "datasource": "Prometheus",
       "description": "",
-      "format": "decbytes",
+      "format": "bytes",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,

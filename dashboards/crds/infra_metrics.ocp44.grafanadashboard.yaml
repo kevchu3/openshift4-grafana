@@ -1710,7 +1710,7 @@ spec:
           "yaxes": [
             {
               "decimals": 1,
-              "format": "decbytes",
+              "format": "bytes",
               "label": "",
               "logBase": 1,
               "max": null,
@@ -1802,7 +1802,7 @@ spec:
           "yaxes": [
             {
               "decimals": 1,
-              "format": "decbytes",
+              "format": "bytes",
               "label": "",
               "logBase": 1,
               "max": null,
