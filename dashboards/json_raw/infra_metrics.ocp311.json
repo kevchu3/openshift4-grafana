@@ -2022,7 +2022,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Network Utilization by Node",
+      "title": "Network Throughput by Node",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -2241,7 +2241,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk I/O Utilization",
+      "title": "Disk Latency",
       "tooltip": {
         "shared": true,
         "sort": 2,

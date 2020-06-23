@@ -924,7 +924,7 @@ spec:
             "for": "5m",
             "frequency": "1m",
             "handler": 1,
-            "name": "CPU Utilization by Master alert",
+            "name": "CPU Utilization by Master Node alert",
             "noDataState": "no_data",
             "notifications": []
           },
@@ -988,7 +988,7 @@ spec:
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "CPU Utilization by Master",
+          "title": "CPU Utilization by Master Node",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1370,7 +1370,7 @@ spec:
             "for": "5m",
             "frequency": "1m",
             "handler": 1,
-            "name": "Memory Utilization by Master alert",
+            "name": "Memory Utilization by Master Node alert",
             "noDataState": "no_data",
             "notifications": []
           },
@@ -1432,7 +1432,7 @@ spec:
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Memory Utilization by Master",
+          "title": "Memory Utilization by Master Node",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1838,7 +1838,7 @@ spec:
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Network Utilization by Master",
+          "title": "Network Throughput by Master Node",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1933,7 +1933,7 @@ spec:
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Network Utilization by Compute Node",
+          "title": "Network Throughput by Compute Node",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -2914,7 +2914,7 @@ spec:
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Disk I/O Utilization",
+          "title": "Disk Latency",
           "tooltip": {
             "shared": true,
             "sort": 2,
