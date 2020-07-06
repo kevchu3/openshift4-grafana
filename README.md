@@ -1,5 +1,8 @@
 # Grafana Customization for OpenShift 4
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/kevchu3/openshift4-grafana?color=red&style=plastic)
+![GitHub](https://img.shields.io/github/license/kevchu3/openshift4-grafana?color=red&style=plastic)
+
 ## Background
 
 The prepackaged Grafana operator that ships with OpenShift 4 in the openshift-monitoring namespace is a read-only implementation.  To import a custom dashboard, this project uses the Grafana operator from OperatorHub provided by the community.
