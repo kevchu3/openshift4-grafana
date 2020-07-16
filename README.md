@@ -1,7 +1,7 @@
 # Grafana Customization for OpenShift 4
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/kevchu3/openshift4-grafana?color=red&style=plastic)
-![GitHub](https://img.shields.io/github/license/kevchu3/openshift4-grafana?color=red&style=plastic)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/kevchu3/openshift4-grafana?color=blue&style=plastic)
+![GitHub](https://img.shields.io/github/license/kevchu3/openshift4-grafana?color=blue&style=plastic)
 
 ## Background
 
