@@ -7,61 +7,51 @@
 
 The prepackaged Grafana operator that ships with OpenShift 4 in the openshift-monitoring namespace is a read-only implementation.  To import a custom dashboard, this project uses the Grafana operator from OperatorHub provided by the community.
 
+Inspiration for this customization was taken from [hatmarch's cdc-and-debezium-demo repo].
+
 ## Disclaimer
 > **Community Operators are operators which have not been vetted or verified by Red Hat. Community Operators should be used with caution because their stability is unknown. Red Hat provides no support for Community Operators.**
 
-In addition, this project modifies the Prometheus operator, which is [unsupported].
+This project deploys a self-supported Grafana operator.  It does not modify the existing Prometheus operator, and so it leaves it in a supported state.
 
 ## Requirements
 
 This was deployed and tested on:
-* OpenShift 4.2
-* OpenShift 4.1
-
-For OpenShift 4.3, the built-in Prometheus operator is inaccessible through the steps outlined in this repository.  I have tested [hatmarch's cdc-and-debezium-demo repo] with success, and was able to deploy by running [this script].
+* OpenShift 4.5
+* Grafana Operator v3.5.0 from OperatorHub
 
 ## Deployment
 
-### 1. Create namespace
+### 1. Deploy Grafana operator from OperatorHub
 
-Create a new project (i.e. my-grafana) and install the community-supported Grafana operator and Grafana instance.  In the Grafana instance YAML, make a note of the default username and password to log in.
+Create a new project (i.e. my-grafana) and deploy the community-supported Grafana operator from OperatorHub.  The Grafana operator creates Custom Resource Definitions (CRDs) for the following objects:
+* grafanas.integreatly.org
+* grafanadatasources.integreatly.org
+* grafanadashboards.integreatly.org
 
-### 2. Configure prometheus-k8s StatefulSet
+To create a Grafana resource from the UI, navigate to Installed Operators -> Grafana Operator -> Grafana -> Create Grafana.  Configure your Grafana resource as desired, and press Create.
 
-In the openshift-monitoring project, we need to configure prometheus-k8s to listen on all addresses, not just localhost.  Edit the YAML for prometheus-k8s StatefulSet and change `'--web.listen-address=127.0.0.1:9090'` to `'--web.listen-address=:9090'` as follows:
+### 2. Deploy GrafanaDataSource for Prometheus
+
+A GrafanaDataSource must be created with a bearer token for the `grafana-serviceaccount` service account which authenticates to Prometheus in the `openshift-monitoring` namespace.  The following command will deploy a GrafanaDataSource and ConfigMap simultaneously, both with this bearer token.
+
 ```
-spec:
-  template:
-    spec:
-      containers:
-        - name: prometheus
-          args:
-            - '--web.listen-address=:9090'
-```
-
-### 3. Configure Datasource and import dashboards
-
-#### 3a. Configure via Grafana UI
-
-Log into the Grafana UI in the browser, using the default authentication configured in step 1.
-
-Navigate to Configuration -> Data Sources -> Add Data Source -> Prometheus.  Use the following:
-```
-Name: Prometheus
-HTTP URL: http://prometheus-operated.openshift-monitoring.svc.cluster.local:9090
+oc process -f ./datasources/prometheus-grafanadatasource-template.yaml \
+  PROJECT_NAME="my-grafana" \
+  DATASOURCE_NAME=Prometheus \
+  BEARER_TOKEN=$(oc serviceaccounts get-token grafana-serviceaccount -n my-grafana) | oc apply -f -
 ```
 
-Save and Test.
+### 3. Import dashboards
 
-I have provided some example [JSON dashboards] in this repository.  Save the example custom dashboard in this Git repository's `/dashboards` folder to your local machine.  From the Grafana UI, Create -> Import -> Upload .json File -> select the saved file
+The Grafana operator will look for GrafanaDashboard resources and deploy them.  I have provided some [example GrafanaDashboards], which can be deployed with:
 
-#### 3b. Configure via Grafana operator CRDs
+```
+oc create -f <dashboard>
+```
 
-The Grafana operator creates Custom Resource Definitions (CRDs) for both `grafanadatasources.integreatly.org` and `grafanadashboards.integreatly.org`.
+If you are unable to deploy the GrafanaDashboard custom resources, I have also provided [JSON dashboards] which can be imported directly from within the Grafana console.
 
-You can view the GrafanaDatasources in the cluster with: `oc get grafanadatasources`.  Import the [example GrafanaDatasource] with: `oc create -f <datasource>`
-
-You can view the GrafanaDashboards in the cluster with: `oc get grafanadashboards`.  Import the [example GrafanaDashboard] with: `oc create -f <dashboard>`
 
 ## License
 
@@ -71,10 +61,8 @@ GPLv3
 
 Kevin Chung
 
-[unsupported]: https://docs.openshift.com/container-platform/4.3/monitoring/cluster_monitoring/configuring-the-monitoring-stack.html#maintenance-and-support_configuring-monitoring
 [hatmarch's cdc-and-debezium-demo repo]: https://github.com/hatmarch/cdc-and-debezium-demo#custom-grafana-dashboard-for-debezium
 [this script]: https://github.com/hatmarch/cdc-and-debezium-demo/blob/master/scripts/04-setup-custom-grafana.sh
+[example GrafanaDashboards]: ./dashboards/crds/
 [JSON dashboards]: ./dashboards/json_raw/
-[example GrafanaDatasource]: ./datasources/
-[example GrafanaDashboard]: ./dashboards/crds/
 
