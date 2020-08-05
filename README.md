@@ -7,8 +7,6 @@
 
 The prepackaged Grafana operator that ships with OpenShift 4 in the openshift-monitoring namespace is a read-only implementation.  To import a custom dashboard, this project uses the Grafana operator from OperatorHub provided by the community.
 
-Inspiration for this customization was taken from [hatmarch's cdc-and-debezium-demo repo].
-
 ## Disclaimer
 > **Community Operators are operators which have not been vetted or verified by Red Hat. Community Operators should be used with caution because their stability is unknown. Red Hat provides no support for Community Operators.**
 
@@ -16,9 +14,9 @@ This project deploys a self-supported Grafana operator.  It does not modify the 
 
 ## Requirements
 
-This was deployed and tested on:
+This was deployed and tested with:
 * OpenShift 4.5
-* Grafana Operator v3.5.0 from OperatorHub
+* Grafana Operator 3.5.0 from OperatorHub
 
 ## Deployment
 
@@ -33,13 +31,16 @@ To create a Grafana resource from the UI, navigate to Installed Operators -> Gra
 
 ### 2. Deploy GrafanaDataSource for Prometheus
 
-A GrafanaDataSource must be created with a bearer token for the `grafana-serviceaccount` service account which authenticates to Prometheus in the `openshift-monitoring` namespace.  The following command will deploy a GrafanaDataSource and ConfigMap simultaneously, both with this bearer token.
+The grafana-serviceaccount service account is created alongside the Grafana instance.  The bearer token for this service account is used to authenticate access to Prometheus in the openshift-monitoring namespace.  The following command will display this token.
 
 ```
-oc process -f ./datasources/prometheus-grafanadatasource-template.yaml \
-  PROJECT_NAME="my-grafana" \
-  DATASOURCE_NAME=Prometheus \
-  BEARER_TOKEN=$(oc serviceaccounts get-token grafana-serviceaccount -n my-grafana) | oc apply -f -
+oc serviceaccounts get-token grafana-serviceaccount -n my-grafana
+```
+
+From the Grafana Data Source resource, press Create Instance, and navigate to the YAML view.  Create the [example GrafanaDataSource], substituting `${BEARER_TOKEN}` with the output of the command above.
+
+```
+oc create -f ./datasources/prometheus-grafanadatasource.yaml
 ```
 
 ### 3. Import dashboards
@@ -61,8 +62,7 @@ GPLv3
 
 Kevin Chung
 
-[hatmarch's cdc-and-debezium-demo repo]: https://github.com/hatmarch/cdc-and-debezium-demo#custom-grafana-dashboard-for-debezium
-[this script]: https://github.com/hatmarch/cdc-and-debezium-demo/blob/master/scripts/04-setup-custom-grafana.sh
+[example GrafanaDatasource]: ./datasources/prometheus-grafanadatasource.yaml
 [example GrafanaDashboards]: ./dashboards/crds/
 [JSON dashboards]: ./dashboards/json_raw/
 
