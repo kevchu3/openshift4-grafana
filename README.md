@@ -31,7 +31,13 @@ To create a Grafana resource from the UI, navigate to Installed Operators -> Gra
 
 ### 2. Deploy GrafanaDataSource for Prometheus
 
-The grafana-serviceaccount service account is created alongside the Grafana instance.  The bearer token for this service account is used to authenticate access to Prometheus in the openshift-monitoring namespace.  The following command will display this token.
+The grafana-serviceaccount service account was created alongside the Grafana instance.  We will grant it the cluster-monitoring-view cluster role.
+
+```
+oc adm policy add-cluster-role-to-user cluster-monitoring-view -z grafana-serviceaccount
+```
+
+The bearer token for this service account is used to authenticate access to Prometheus in the openshift-monitoring namespace.  The following command will display this token.
 
 ```
 oc serviceaccounts get-token grafana-serviceaccount -n my-grafana
