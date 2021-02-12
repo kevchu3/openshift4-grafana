@@ -20,7 +20,7 @@ This was deployed and tested with:
 
 ## Deployment
 
-### 1. Deploy Grafana operator from OperatorHub
+### 1a. Deploy Grafana operator from OperatorHub
 
 Create a new project (i.e. my-grafana) and deploy the community-supported Grafana operator from OperatorHub.  The Grafana operator creates Custom Resource Definitions (CRDs) for the following objects:
 * grafanas.integreatly.org
@@ -28,6 +28,10 @@ Create a new project (i.e. my-grafana) and deploy the community-supported Grafan
 * grafanadashboards.integreatly.org
 
 To create a Grafana resource from the UI, navigate to Installed Operators -> Grafana Operator -> Grafana -> Create Grafana.  Configure your Grafana resource as desired, and press Create.
+
+### 1b. Additional instructions for deploying in a restricted network
+
+Follow these additional instructions to [deploy Grafana operator in a restricted network].
 
 ### 2. Deploy GrafanaDataSource for Prometheus
 
@@ -68,6 +72,7 @@ GPLv3
 
 Kevin Chung
 
+[deploy Grafana operator in a restricted network]: restricted-setup.md
 [example GrafanaDatasource]: ./datasources/prometheus-grafanadatasource.yaml
 [example GrafanaDashboards]: ./dashboards/crds/
 [JSON dashboards]: ./dashboards/json_raw/
