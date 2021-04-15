@@ -11,9 +11,9 @@ Follow this documentation to [configure Operator Lifecycle Manager in a restrict
 
 Deploy the Grafana community operator from OperatorHub.  The operator pod will throw an ImagePullBackOff error, but this will allow you to note the image tag supplied.
 
-Patch the images with your mirror repository.  At the time of this writing, Grafana operator is using tag version `v3.8.1`.
+Patch the images with your mirror repository.  At the time of this writing, Grafana operator is using tag version `v3.9.0`.
 ```
-oc patch deployment grafana-operator -p '{"spec":{"template":{"spec":{"containers":[{"args":["--grafana-image=nexus.example.com/grafana/grafana", "--grafana-plugins-init-container-image=nexus.example.com/integreatly/grafana_plugins_init"],"image":"nexus.example.com/integreatly/grafana-operator:v3.8.1","name":"grafana-operator"}]}}}}'
+oc patch deployment grafana-operator -p '{"spec":{"template":{"spec":{"containers":[{"args":["--grafana-image=nexus.example.com/grafana/grafana", "--grafana-plugins-init-container-image=nexus.example.com/integreatly/grafana_plugins_init"],"image":"nexus.example.com/integreatly/grafana-operator:v3.9.0","name":"grafana-operator"}]}}}}'
 ```
 
 Mirror the following Grafana images to your mirror repository.  Tag versions change over time, so note the versions that are attempting to be pulled:
