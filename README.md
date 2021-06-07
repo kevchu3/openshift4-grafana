@@ -15,8 +15,8 @@ This project deploys a self-supported Grafana operator.  It does not modify the 
 ## Requirements
 
 This was deployed and tested with:
-* OpenShift 4.5
-* Grafana Operator 3.5.0 from OperatorHub
+* OpenShift 4.7
+* Grafana Operator 3.9.0 from OperatorHub
 
 ## Deployment
 
