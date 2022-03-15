@@ -612,7 +612,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(kube_namespace_created{namespace!~\"(default|kube|openshift).*\"})",
+          "expr": "count(kube_namespace_labels{namespace!~\"(default|kube|openshift).*\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
