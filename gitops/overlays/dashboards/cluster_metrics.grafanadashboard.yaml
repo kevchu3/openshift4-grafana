@@ -2,6 +2,8 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: cluster-metrics
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   folder: "General"
   resyncPeriod: 30s
@@ -1171,7 +1173,7 @@ spec:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "avg by (operation_type) (rate(container_runtime_crio_operations_latency_microseconds[5m]))",
+              "expr": "avg by (operation) (rate(container_runtime_crio_operations_latency_seconds[5m]))",
               "format": "time_series",
               "hide": false,
               "interval": "",
