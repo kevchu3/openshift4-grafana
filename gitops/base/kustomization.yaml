@@ -9,4 +9,5 @@ resources:
   - grafana.yaml
   - secret.yaml
   - rolebindings.yaml
+  - grafanadatasource.yaml
   - patch-grafanadatasource.yaml

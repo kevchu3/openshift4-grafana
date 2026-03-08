@@ -1,33 +1,3 @@
-apiVersion: grafana.integreatly.org/v1beta1
-kind: GrafanaDatasource
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "3"
-  name: prometheus-grafanadatasource
-spec:
-  instanceSelector:
-    matchLabels:
-      dashboards: my-grafana
-  valuesFrom:
-    - targetPath: "secureJsonData.httpHeaderValue1"
-      valueFrom:
-        secretKeyRef:
-          name: "grafana-credentials"
-          key: "token"
-  datasource:
-    access: proxy
-    editable: true
-    isDefault: true
-    jsonData:
-      httpHeaderName1: 'Authorization'
-      timeInterval: 5s
-      tlsSkipVerify: true
-    name: Prometheus
-    secureJsonData:
-      httpHeaderValue1: 'Bearer ${token}'
-    type: prometheus
-    url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9091'
----
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -35,7 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   template:
     spec:
