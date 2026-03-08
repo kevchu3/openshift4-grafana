@@ -1173,7 +1173,7 @@
             "type": "prometheus",
             "uid": "Prometheus"
           },
-          "expr": "avg by (operation_type) (rate(container_runtime_crio_operations_latency_seconds_total[5m]))",
+          "expr": "avg by (operation) (rate(container_runtime_crio_operations_latency_seconds[5m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
