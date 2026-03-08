@@ -2,6 +2,8 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: infra-metrics
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   folder: "General"
   resyncPeriod: 30s
